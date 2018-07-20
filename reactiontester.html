@@ -1,0 +1,74 @@
+<!Doctype html>
+ 
+    <head>
+	
+        <title>Reaction Tester</title>
+		<style>
+		    #change{
+			    height:200px;
+				width:200px;
+				background-color:red;
+				position:relative;
+				display:none;
+				}
+		</style>
+
+    </head>
+
+        <body>
+        
+		    <h1>Test Your Reaction!</h1>
+			<h3>Click on the boxes and circles as quickly
+			    as you can!</h3>
+				<p id="test"></p>
+				<p id="testi"></p>
+		    <p id="get">Your Time: <span id="timetaken"></span></p>	
+            <div id="change"></div>			
+        <script type="text/javascript">
+		
+		    var start = new Date().getTime();
+			function colorPicker(){
+			    var list = '0123456789ABCDEF'.split('');
+				var color = '#';
+				for(var i = 0; i<6 ; i++) {
+			    color += list[Math.floor(Math.random()*16)];
+		        }
+				return color;
+            }    
+			
+			function shapeMaker(){
+			    var top = Math.random() * 400;
+				var left = Math.random() * 400;
+				var width = (Math.random() *200) +100;
+				if(Math.random() > 0.5) {
+				    document.getElementById("change").style.borderRadius = "50%";
+				} else {
+                    document.getElementById("change").style.borderRadius = "0";
+                }
+				document.getElementById("change").style.backgroundColor = colorPicker();
+  				document.getElementById("change").style.width = width + "px";
+			    document.getElementById("change").style.height = width +"px";
+				document.getElementById("change").style.top = top + "px";
+				document.getElementById("change").style.left = left + "px";
+				document.getElementById("change").style.display = "block";
+				start = new Date().getTime();
+			}
+
+			function appearAfterDelay() {
+			    setTimeout(shapeMaker,Math.random()*2000);
+			}	
+			 appearAfterDelay();
+			
+            document.getElementById("change").onclick = function() {
+                document.getElementById("change").style.display = "none";
+                var end =new Date().getTime();
+                var timeTaken = (end - start)/1000;
+                document.getElementById("timetaken").innerHTML = timeTaken +"s";
+                appearAfterDelay();
+            }				
+        </script>
+
+        </body>
+
+
+</html>
